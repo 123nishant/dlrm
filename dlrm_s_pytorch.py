@@ -119,6 +119,8 @@ def time_wrap(use_gpu):
 
 def dlrm_wrap(X, lS_o, lS_i, use_gpu, device, ndevices=1):
     with record_function("DLRM forward"):
+        ## record_function is a context manager to label arbitrary code ranges with user provided names
+        ## refer https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html
         if use_gpu:  # .cuda()
             # lS_i can be either a list of tensors or a stacked tensor.
             # Handle each case below:
