@@ -237,7 +237,7 @@ class DLRM_Net(nn.Module):
 
     def create_emb(self, m, ln, weighted_pooling=None):
         emb_l = nn.ModuleList()
-        v_W_l = []
+        v_W_l = [] # Indicates weighted_pooling . Refer end of this function
         for i in range(0, ln.size):
             if ext_dist.my_size > 1:
                 if i not in self.local_emb_indices:
@@ -277,9 +277,9 @@ class DLRM_Net(nn.Module):
                 # approach 3
                 # EE.weight = Parameter(torch.tensor(W),requires_grad=True)
             if weighted_pooling is None:
-                v_W_l.append(None)
+                v_W_l.append(None) # No Weighted_pooling
             else:
-                v_W_l.append(torch.ones(n, dtype=torch.float32))
+                v_W_l.append(torch.ones(n, dtype=torch.float32)) # Weighted Pooling present
             emb_l.append(EE)
         return emb_l, v_W_l
 
