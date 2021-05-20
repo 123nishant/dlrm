@@ -236,6 +236,8 @@ class DLRM_Net(nn.Module):
         return torch.nn.Sequential(*layers)
 
     def create_emb(self, m, ln, weighted_pooling=None):
+        
+        # ln  : ln_emb = train_data.counts
         emb_l = nn.ModuleList()
         v_W_l = [] # Indicates weighted_pooling . Refer end of this function
         for i in range(0, ln.size):
